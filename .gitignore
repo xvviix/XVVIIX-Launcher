@@ -31,9 +31,7 @@ activity.json
 xvviix_launcher.log
 icons_cache/
 
-# Third-party/optional media is kept local and is not redistributed here
-assets/*.ogg
-assets/*.wav
+# Unused local intro media
 intro.mp4
 
 # Editors and operating systems

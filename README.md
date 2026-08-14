@@ -196,11 +196,11 @@ On first launch, XVVIIX asks you to create a master password and initializes its
 
 ---
 
-## Optional audio assets
+## Audio assets
 
-Third-party audio binaries are intentionally **not redistributed in this public source repository**. The application remains fully usable without them and reports audio as unavailable rather than failing.
+XVVIIX includes its cinematic **Galactic Odyssey** background track and four interface sound effects in `assets/`. Music playback is independent from interface cues, volume-controlled, and loaded asynchronously after first paint.
 
-If you have appropriate licenses, place audio files at the paths referenced by `SOUNDS` and `MUSIC_FILE` in `game_launcher.py`. See [`MUSIC_CREDITS.txt`](MUSIC_CREDITS.txt) for the original music attribution and usage notes.
+The background track is credited to **AlkaKrab** and comes from *Free Sci-Fi Music Pack Vol. 2*. See [`MUSIC_CREDITS.txt`](MUSIC_CREDITS.txt) for attribution and the supplied license summary. Third-party audio remains subject to its original terms and must not be resold, relicensed, claimed as original work, or redistributed as a standalone audio product.
 
 ---
 
@@ -215,12 +215,14 @@ XVVIIX-Launcher/
 ├── MUSIC_CREDITS.txt         # Optional music attribution and license summary
 ├── icon.ico                  # Application icon
 ├── assets/
-│   └── xvviix_header.png     # Header artwork
+│   ├── xvviix_header.png                    # Header artwork
+│   ├── xvviix_music_galactic_odyssey.ogg   # Cinematic background music
+│   └── tunetank.com_*.wav                   # Interface sound effects
 └── docs/images/
-    └── xvviix-banner.svg     # GitHub README artwork
+    └── xvviix-banner.svg                    # GitHub README artwork
 ```
 
-Runtime libraries, encrypted vault metadata, settings, logs, icon caches, backups, and licensed audio are excluded from version control.
+Runtime libraries, encrypted vault metadata, settings, logs, icon caches, and backups are excluded from version control.
 
 ---
 
@@ -281,7 +283,7 @@ Install `tkinterdnd2`, restart XVVIIX, and verify that the package was installed
 <details>
 <summary><strong>Audio is unavailable</strong></summary>
 
-Install `pygame` and provide locally licensed audio assets at the paths configured in `game_launcher.py`. Audio failure is non-fatal by design.
+Install `pygame` and verify that the bundled `.ogg` and `.wav` files are present in `assets/`. Audio failure is non-fatal by design.
 
 </details>
 
