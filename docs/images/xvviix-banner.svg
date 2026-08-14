@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="420" viewBox="0 0 1400 420" role="img" aria-labelledby="title desc">
+  <title id="title">XVVIIX Launcher</title>
+  <desc id="desc">A premium local-first command center for games, applications, diagnostics, and live hardware telemetry.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#050814"/>
+      <stop offset="0.52" stop-color="#0b1023"/>
+      <stop offset="1" stop-color="#111934"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#8b5cf6"/>
+      <stop offset="0.48" stop-color="#a855f7"/>
+      <stop offset="1" stop-color="#22d3ee"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#8b5cf6" stop-opacity=".32"/>
+      <stop offset="1" stop-color="#8b5cf6" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="blur"><feGaussianBlur stdDeviation="34"/></filter>
+    <filter id="soft"><feDropShadow dx="0" dy="0" stdDeviation="9" flood-color="#22d3ee" flood-opacity=".35"/></filter>
+    <pattern id="grid" width="42" height="42" patternUnits="userSpaceOnUse">
+      <path d="M42 0H0V42" fill="none" stroke="#667eea" stroke-opacity=".07" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1400" height="420" rx="28" fill="url(#bg)"/>
+  <rect width="1400" height="420" rx="28" fill="url(#grid)"/>
+  <ellipse cx="1090" cy="135" rx="330" ry="260" fill="url(#glow)" filter="url(#blur)"/>
+  <path d="M0 348 C280 288 520 430 795 340 S1190 250 1400 320 V420 H0Z" fill="#8b5cf6" opacity=".07"/>
+  <path d="M820 0 L1400 0 L1400 420 L1115 420Z" fill="url(#accent)" opacity=".035"/>
+  <rect x="54" y="54" width="8" height="312" rx="4" fill="url(#accent)"/>
+  <g transform="translate(104 76)">
+    <path d="M28 0 L36 20 L56 28 L36 36 L28 56 L20 36 L0 28 L20 20Z" fill="#f8fafc" filter="url(#soft)"/>
+    <text x="84" y="54" fill="#f8fafc" font-family="Segoe UI,Inter,Arial,sans-serif" font-size="78" font-weight="900" letter-spacing="4">XVVIIX</text>
+    <text x="88" y="100" fill="#67e8f9" font-family="Consolas,monospace" font-size="20" font-weight="700" letter-spacing="4">LAUNCHER  //  COMMAND CENTER</text>
+  </g>
+  <g transform="translate(108 236)">
+    <rect width="620" height="1" fill="url(#accent)" opacity=".75"/>
+    <text y="54" fill="#c4d1e5" font-family="Segoe UI,Inter,Arial,sans-serif" font-size="23" font-weight="600">Launch. Track. Discover. Diagnose.</text>
+    <text y="94" fill="#7184a6" font-family="Consolas,monospace" font-size="15" letter-spacing="1.4">LOCAL-FIRST  •  ENCRYPTED  •  RESPONSIVE  •  LIVE TELEMETRY</text>
+  </g>
+  <g transform="translate(925 88)" opacity=".9">
+    <rect width="354" height="230" rx="18" fill="#0f172a" stroke="#33456c"/>
+    <rect x="22" y="22" width="310" height="42" rx="8" fill="#17213a"/>
+    <circle cx="45" cy="43" r="6" fill="#14b8a6"/>
+    <text x="62" y="49" fill="#67e8f9" font-family="Consolas,monospace" font-size="13" font-weight="700">SYSTEM ONLINE</text>
+    <g transform="translate(22 84)">
+      <rect width="146" height="54" rx="8" fill="#17213a"/>
+      <text x="14" y="21" fill="#22d3ee" font-family="Consolas,monospace" font-size="10">CPU LOAD</text>
+      <text x="14" y="44" fill="#f8fafc" font-family="Segoe UI,Arial" font-size="22" font-weight="800">14%</text>
+      <rect x="164" width="146" height="54" rx="8" fill="#17213a"/>
+      <text x="178" y="21" fill="#a78bfa" font-family="Consolas,monospace" font-size="10">GPU LOAD</text>
+      <text x="178" y="44" fill="#f8fafc" font-family="Segoe UI,Arial" font-size="22" font-weight="800">62%</text>
+      <rect y="70" width="146" height="54" rx="8" fill="#17213a"/>
+      <text x="14" y="91" fill="#2dd4bf" font-family="Consolas,monospace" font-size="10">MEMORY</text>
+      <text x="14" y="114" fill="#f8fafc" font-family="Segoe UI,Arial" font-size="22" font-weight="800">35%</text>
+      <rect x="164" y="70" width="146" height="54" rx="8" fill="#17213a"/>
+      <text x="178" y="91" fill="#f59e0b" font-family="Consolas,monospace" font-size="10">STORAGE</text>
+      <text x="178" y="114" fill="#f8fafc" font-family="Segoe UI,Arial" font-size="22" font-weight="800">17%</text>
+    </g>
+  </g>
+  <rect x="1" y="1" width="1398" height="418" rx="27" fill="none" stroke="url(#accent)" stroke-opacity=".35" stroke-width="2"/>
+</svg>

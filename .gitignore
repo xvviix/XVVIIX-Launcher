@@ -1,0 +1,52 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+.env
+.env.*
+
+# Tooling and build output
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+build/
+dist/
+*.egg-info/
+
+# XVVIIX runtime state — never publish user libraries or credentials
+xvviix_vault.json
+xvviix_vault.json.bak
+launcher_settings.json
+games.json
+apps.json
+founded.json
+reports.json
+activity.json
+*.bak
+*.corrupt-*
+*.tmp*
+*.vault-stage
+xvviix_launcher.log
+icons_cache/
+
+# Third-party/optional media is kept local and is not redistributed here
+assets/*.ogg
+assets/*.wav
+intro.mp4
+
+# Editors and operating systems
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Local archives and secrets
+*.zip
+*.7z
+*.tar
+*.gz
+*.pem
+*.key

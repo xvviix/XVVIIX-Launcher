@@ -1,0 +1,28 @@
+XVVIIX LAUNCHER — MUSIC CREDIT
+=============================
+
+Track: "Galactic Odyssey" (loop version)
+Artist: AlkaKrab
+Credit: Music by AlkaKrab
+
+Source pack:
+Free Sci-Fi Music Pack Vol. 2
+https://alkakrab.itch.io/free-sci-fi-music-2
+
+License summary supplied with the pack:
+- Royalty-free; commercial and non-commercial use is allowed in games, apps,
+  videos, streams, podcasts, trailers, and other interactive media.
+- Credit is appreciated but not required.
+- Timing, volume, EQ, and transition edits are allowed.
+- The original track may not be resold, sublicensed, redistributed as a
+  standalone music file, uploaded as-is to streaming services, or claimed as
+  the user's own work.
+- For open-source game distribution or custom permissions, contact the artist.
+
+Contact: alkakrab04@gmail.com
+
+XVVIIX adaptation:
+The supplied 24-bit WAV loop was level-adjusted for launcher use and encoded
+as a high-quality Ogg Vorbis file. No musical remixing or sampling was done.
+
+Downloaded and integrated: 2026-08-14

@@ -1,0 +1,11 @@
+# Core UI enhancements, monitoring, and independent background audio
+Pillow
+tkinterdnd2
+psutil
+nvidia-ml-py>=12
+pygame
+cryptography>=41
+
+# Optional Windows integrations
+pywin32; sys_platform == "win32"
+icoextract; sys_platform == "win32"
