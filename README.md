@@ -120,11 +120,23 @@ On Windows, XVVIIX registers **current-user login startup** after its first succ
 
 Keep the project in a permanent folder. Windows Startup Apps controls can independently disable the registration. See [startup settings, registry paths and troubleshooting](docs/windows-startup.md).
 
+<div align="center">
+<img src="docs/images/startup-settings.png" alt="Startup settings — Start with Windows, artwork previews, background color and session vault status" width="520">
+</div>
+
 ## Launch, scan and exit updates
 
 Process creation, trainer startup and administrator dispatch run off the Tk event thread. When closing with running programs, XVVIIX warns that timing will stop, saves a checkpoint and leaves those programs open. Slow final saves have a responsive retry/explicit-exit dialog.
 
+<div align="center">
+<img src="docs/images/closing-session.png" alt="Saving your session — final playtime checkpoint while exiting" width="510">
+</div>
+
 Scanning now offers only **Control Panel — registered apps** and **Find programs — usual install locations**. Whole-system/drive scanning is removed. Runtime components such as .NET and embedded 7-Zip helpers are filtered, and duplicate product versions prefer the main executable. See [current library workflow](docs/library-workflow.md).
+
+<div align="center">
+<img src="docs/images/scan-scope.png" alt="Scan scope — two local discovery modes, no whole-drive sweep" width="500">
+</div>
 
 ## Interface
 
@@ -132,7 +144,17 @@ Scanning now offers only **Control Panel — registered apps** and **Find progra
 
 The primary view adapts from compact laptop widths to larger desktop layouts. Cards expose launch, trainer, location, icon, pin, and end-task actions. Live time/status changes update existing card widgets; structural changes rebuild only the affected card while preserving the scroll anchor. Previous/Next controls are available above and below the cards.
 
-Use checkboxes, Ctrl-click or Shift-click to select entries, then move, pin/unpin or remove them together. Removal affects launcher entries, not program files. **Recent Activity / Open History** opens a searchable, filterable timeline without resetting the card view.
+Use checkboxes, Ctrl-click or Shift-click to select entries, then move, pin/unpin or remove them together. Removal affects launcher entries, not program files.
+
+<div align="center">
+<img src="docs/images/library-multi-select.png" alt="Library multi-selection — three entries selected with page-level actions" width="960">
+</div>
+
+**Recent Activity / Open History** opens a searchable, filterable timeline without resetting the card view.
+
+<div align="center">
+<img src="docs/images/recent-activity.png" alt="Recent Activity — local history timeline with search and filters" width="900">
+</div>
 
 ### Hardware Monitor
 
@@ -144,6 +166,23 @@ Open **MONITOR** from the main navigation. XVVIIX activates telemetry asynchrono
 - Upload/download rates, active interfaces, local IPv4 addresses, and TCP latency
 - Host identity, uptime, process/thread counts, battery, and sensor data
 - Five current-user CPU leaders and five RAM leaders, with normalized percentages
+
+<table>
+<tr>
+<td width="40%" align="center" valign="top">
+<img src="docs/images/monitor-overlay.png" alt="Game Monitor overlay — CPU, GPU, RAM, swap, disk, network and top-five panels" width="300">
+</td>
+<td width="60%" align="center" valign="top">
+<img src="docs/images/monitor-compact-network.png" alt="Compact monitor bar — CPU, GPU, RAM and live network rates" width="448">
+</td>
+</tr>
+</table>
+
+<div align="center">
+<video src="docs/images/monitor-overlay-demo.mp4" controls width="420"></video>
+<br>
+<sub>Overlay demo — open, compact and close transitions</sub>
+</div>
 
 With the launcher focused, press <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>M</kbd> to open or compact the overlay. Drag its title to move it; use the square button to collapse/expand, and **×** or **Escape** to close. Press <kbd>F11</kbd> to toggle launcher fullscreen.
 
@@ -164,6 +203,10 @@ XVVIIX is local-first by default.
 - Scanner and diagnostics execute locally
 - Passwords are not stored by the launcher
 - Optional **Forgot Password** flow: code-free local reset that preserves your libraries
+
+<div align="center">
+<img src="docs/images/password-reset.png" alt="Local password reset — new password and confirmation, no recovery code required" width="560">
+</div>
 
 The Monitor performs one optional TCP latency check against `1.1.1.1:443`; it sends no library or diagnostic content. Remove or change the probe target in `xvviix/services/hardware_monitor.py` if your environment prohibits outbound checks.
 
