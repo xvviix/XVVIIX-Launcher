@@ -1,11 +1,19 @@
-# Core UI enhancements, monitoring, and independent background audio
-Pillow
-tkinterdnd2
-psutil
-nvidia-ml-py>=12
-pygame
-cryptography>=41
+# Runtime snapshot for repeatable installs. Update with tests, not an unreviewed pip upgrade.
+# Python 3.11 and 3.13 are covered by the CI matrix.
 
-# Optional Windows integrations
-pywin32; sys_platform == "win32"
-icoextract; sys_platform == "win32"
+# Core UI, monitoring and audio
+Pillow==12.3.0
+tkinterdnd2==0.6.3
+psutil==7.2.2
+nvidia-ml-py==13.610.43
+pygame==2.6.1
+cryptography==50.0.1
+
+# Transitive cryptography dependencies (CPython)
+cffi==2.1.1
+pycparser==3.0
+
+# Optional Windows integrations and their dependency
+pywin32==312; sys_platform == "win32"
+icoextract==0.3.0; sys_platform == "win32"
+pefile==2024.8.26; sys_platform == "win32"

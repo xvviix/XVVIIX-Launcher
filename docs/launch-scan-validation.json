@@ -1,0 +1,19 @@
+{
+  "date": "2026-09-06",
+  "python_3_11_linux": {
+    "tests": 191,
+    "passed": 182,
+    "windows_only_skips": 9
+  },
+  "python_3_13_linux": {
+    "tests": 191,
+    "passed": 182,
+    "windows_only_skips": 9
+  },
+  "real_disposable_child_survives_launcher_exit": true,
+  "slow_creation_and_liveness_do_not_block_ui": true,
+  "native_ico_master_preserved_byte_for_byte": true,
+  "unexpected_callback_errors_in_final_runs": 0,
+  "native_windows": "not executed in this workspace",
+  "uac_and_real_game_launchers": "manual Windows validation still required"
+}

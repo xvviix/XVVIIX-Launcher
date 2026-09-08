@@ -1,0 +1,75 @@
+{
+  "test_only": true,
+  "description": "Synthetic compatibility vectors generated with the pre-refactor launcher. No user data or real credentials.",
+  "password": "public-test-only-legacy-password",
+  "expected_games": [
+    {
+      "name": "Synthetic compatibility game",
+      "path": "C:\\TestFixtures\\Example\\game.exe",
+      "trainer": "",
+      "icon": "",
+      "playtime": 42,
+      "pinned": false,
+      "color": "#123456"
+    }
+  ],
+  "vaults": {
+    "v1": {
+      "metadata": {
+        "format": "xvviix-vault-v1",
+        "cipher": "AES-256-GCM",
+        "kdf": {
+          "name": "scrypt",
+          "n": 32768,
+          "r": 8,
+          "p": 1,
+          "salt": "pXi7nTxRpmd/EXNzGUbrHA=="
+        },
+        "created": "2026-09-06T14:43:43+00:00",
+        "verifier": "mxacvVoHEZbRoNUdaKVujns3UbynljRiRpmWrDznEKQ="
+      },
+      "files": {
+        "games.json": "{\n  \"format\": \"xvviix-encrypted-json-v1\",\n  \"cipher\": \"AES-256-GCM\",\n  \"nonce\": \"YDcMzXe0xAf5mS8m\",\n  \"ciphertext\": \"xQi8FJIYbdv/D0kTxqLsCCpjaCHvFzGJJGKNZKcmBUrDccyIPdQHbWEyOLGZhafJGu8QIH/08VpZm/5lKhCti5b0oaYJXD7dQ/TcQV+2HprxeG/AV6Fp6q0dKv7jUgStcty5EONacJlY6ZXsG8HG8kqs0iazjcO2/epT9SGwM95xA1pummSXAHnHh/eY4puK3ciOEZ8VeadPne28XFe2DkOlVQqn2WHwYERCc8jntDuk1Z/ymBeuknk=\"\n}\n",
+        "apps.json": "{\n  \"format\": \"xvviix-encrypted-json-v1\",\n  \"cipher\": \"AES-256-GCM\",\n  \"nonce\": \"ukC71RQlBlSPusnd\",\n  \"ciphertext\": \"ayb62P7Pn1KG6axEpZyRhbYE\"\n}\n",
+        "founded.json": "{\n  \"format\": \"xvviix-encrypted-json-v1\",\n  \"cipher\": \"AES-256-GCM\",\n  \"nonce\": \"q6erQhGb21sa9M9g\",\n  \"ciphertext\": \"AsZWXCCD0YncYiTfdChiNpwm\"\n}\n",
+        "reports.json": "{\n  \"format\": \"xvviix-encrypted-json-v1\",\n  \"cipher\": \"AES-256-GCM\",\n  \"nonce\": \"En+pIM3dOah2kVei\",\n  \"ciphertext\": \"gY2yGrsRUtkmC0hpkBKNuWM3\"\n}\n",
+        "activity.json": "{\n  \"format\": \"xvviix-encrypted-json-v1\",\n  \"cipher\": \"AES-256-GCM\",\n  \"nonce\": \"gef++MKoTg60Vyr0\",\n  \"ciphertext\": \"FW7KQnVKjvVWJbBsjS7SxVtl\"\n}\n"
+      }
+    },
+    "v2": {
+      "metadata": {
+        "format": "xvviix-vault-v2",
+        "cipher": "AES-256-GCM",
+        "kdf": {
+          "name": "scrypt",
+          "n": 32768,
+          "r": 8,
+          "p": 1,
+          "salt": "JI6JMdhIWxOnsXZ8KY+urg=="
+        },
+        "created": "2026-09-06T14:43:43+00:00",
+        "verifier": "TvGdgSH46yBYz9cZW8DAr023eSQqj0R/D5VUjNpWqwk=",
+        "vault_id": "a90862dd6cee4090aa4d8bfa944be10a",
+        "local_password_reset": true,
+        "wrapped_data_key": {
+          "nonce": "H8qcKFfqQ5b2gphL",
+          "ciphertext": "8D2xXI3cfxZXefVwaBlr5gRYo5fdws/d5YEamvmx08ZKqwjWJRcSrzypJu/e3rs4"
+        },
+        "data_key_check": "mcyRRgOtO8eAhOoTqgE+e55g5mrF5EV0K5uOMDcSkAc="
+      },
+      "files": {
+        "games.json": "{\n  \"format\": \"xvviix-encrypted-json-v1\",\n  \"cipher\": \"AES-256-GCM\",\n  \"nonce\": \"hUz/z0d/0pskUPDT\",\n  \"ciphertext\": \"iiCXNE9WJ5up0KWmhB0sSFXSNjTc9sa06pMdhSdSvWh6VXAmDDa35FLTDlRkUgNNtOn8R8bbhL2x1qUc/4wZTHqBNvHXc9FKtP1NjA+8c3QeyaRK5ASwjv3LFaXm/Trvziiy86AZM93VDpm0O9QMshi+8/5jfT/JOk4r6VZhsh/YDX97jrBhXHAI4hpaZZzoBwSu/ftJu+ROZxBbFZ9CVdyNyVZ9omKy54KHhuuorJSmJIfreElXssc=\"\n}\n",
+        "apps.json": "{\n  \"format\": \"xvviix-encrypted-json-v1\",\n  \"cipher\": \"AES-256-GCM\",\n  \"nonce\": \"xHflu9C5JUggDihF\",\n  \"ciphertext\": \"xojK3Kw4hckzBw1D3B2MVWlT\"\n}\n",
+        "founded.json": "{\n  \"format\": \"xvviix-encrypted-json-v1\",\n  \"cipher\": \"AES-256-GCM\",\n  \"nonce\": \"hWi5ITVRVf7N/Lp7\",\n  \"ciphertext\": \"vDchtF6iumXBx2RluduSiYvP\"\n}\n",
+        "reports.json": "{\n  \"format\": \"xvviix-encrypted-json-v1\",\n  \"cipher\": \"AES-256-GCM\",\n  \"nonce\": \"QQikSmeIihFAKyEc\",\n  \"ciphertext\": \"rSW93ujZjXA+8M+UEVxBX7dl\"\n}\n",
+        "activity.json": "{\n  \"format\": \"xvviix-encrypted-json-v1\",\n  \"cipher\": \"AES-256-GCM\",\n  \"nonce\": \"frJ90kghvERoyBiu\",\n  \"ciphertext\": \"56/iyCk+3R0ZaGhQ5CF/VdEC\"\n}\n"
+      },
+      "posix_local_recovery": {
+        "format": "xvviix-local-recovery-v1",
+        "vault_id": "a90862dd6cee4090aa4d8bfa944be10a",
+        "protection": "file-permissions",
+        "key_material": "5zkCTALnoE2Bj9jYH+g/yUI+izNEMQlZB5gr0QoDJd8="
+      }
+    }
+  }
+}

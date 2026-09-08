@@ -22,7 +22,9 @@ No account, analytics, cloud library, or always-running telemetry service.
 
 ## Overview
 
-**XVVIIX Launcher** combines a polished game library with application shortcuts, intelligent local discovery, encrypted reports, crash analysis, and an on-demand Hardware Monitor—all inside one responsive desktop interface.
+**XVVIIX Launcher** combines a polished game library with application shortcuts, intelligent local discovery, encrypted system diagnostics and an on-demand Hardware Monitor—all inside one responsive desktop interface.
+
+The current version also adds a transparent top-five Monitor and removes automatic crash reporting. See [monitor changes](docs/monitor-update.md). Stability changes cover non-destructive handling of damaged backups, Windows virtual-environment startup, pinned dependencies, and Linux/Windows CI. See [stability and upgrade notes](docs/stability.md).
 
 The project is designed around three principles:
 
@@ -30,7 +32,7 @@ The project is designed around three principles:
 - **Local ownership** — library data, activity, and reports remain on your machine.
 - **Graceful degradation** — missing optional packages or unsupported hardware never prevent the launcher from opening.
 
-> **Current status:** feature-complete for the published roadmap. The canonical application is `game_launcher.py`; the Hardware Monitor is integrated directly into that file and is not a separate program.
+> **Current structure:** `game_launcher.py` is the desktop entry point; the application is organized in the `xvviix/` package. Vault storage, cryptography, record models, audio, telemetry and password dialogs have separate owners. The Monitor is still integrated into the same launcher, not a separate program. See [architecture and upgrade notes](docs/architecture.md).
 
 ---
 
@@ -43,21 +45,23 @@ The project is designed around three principles:
 ### 🎮 Unified launcher
 
 - Separate **Games**, **Workspace**, and **Discovered** libraries
-- Pinning, sorting, search, playtime tracking, and task termination
-- `.exe`, `.bat`, and Windows shortcut support
-- Custom icons and responsive artwork cards
-- Optional trainer launch flow for games
-- Safe location repair for moved or renamed executables
+- Stable per-card updates, scroll anchoring, top/bottom pagination and multi-selection
+- Group move/remove/pin actions, sorting, search, playtime tracking and verified End Task
+- Background `.exe`/`.bat` launch and Windows shortcut discovery
+- Current-user Windows startup with a persistent in-app off switch
+- Native multi-resolution ICO caches, custom icons and responsive artwork cards
+- Non-blocking trainer/game startup with pending-launch feedback
+- Exit warning and final timing checkpoint without waiting for or closing games
 
 </td>
 <td width="50%" valign="top">
 
 ### ✦ Intelligent discovery
 
-- Reads Windows Start Menu and uninstall metadata locally
-- Classifies games, applications, drivers, installers, and system tools
-- Filters scanner noise instead of polluting the review queue
-- Recovers likely renamed launchers conservatively
+- Exactly two modes: Control Panel apps or usual installation locations
+- Local evidence-based rules using version resources, library paths and engine files
+- Runtime/helper filtering, main-executable deduplication and no whole-drive sweep
+- Strong identity matching for renamed launchers; uncertain cases stay for review
 - Keeps ambiguous results available for manual review
 
 </td>
@@ -69,9 +73,8 @@ The project is designed around three principles:
 
 - Full local **SYS REPORT** pipeline
 - Hardware, OS, storage, network, power, and security sections
-- Deterministic Windows crash-code analysis
 - Actionable findings and health scoring
-- Searchable encrypted report archive
+- Encrypted system-diagnostic archive
 - Copy and deletion controls
 
 </td>
@@ -81,9 +84,9 @@ The project is designed around three principles:
 
 - CPU, GPU, memory, storage, network, battery, and thermal telemetry
 - Normalized `0–100%` process CPU values
-- Exact current-user process inventory
-- Process search and CPU/RAM/name/PID sorting
-- Draggable always-on-top compact overlay
+- Top five CPU and top five RAM processes for the current user
+- Bounded leaderboards without executable-path/thread/state queries
+- Reference-style draggable overlay with a 60 Hz animation target
 - NVIDIA NVML and Windows PDH GPU backends
 
 </td>
@@ -101,21 +104,35 @@ XVVIIX does not keep its heaviest systems running when they are not needed.
 | **On-demand telemetry** | Hardware Monitor remains in zero-overhead standby until the Monitor tab or overlay is opened. |
 | **Deferred GPU backend** | NVML/PDH initialization happens outside the Tk interface thread. |
 | **Deferred audio** | The optional audio backend imports after first paint in a background worker. |
-| **Process sampling cache** | Expensive current-user process enumeration runs once every 2 seconds. |
-| **Balanced UI refresh** | Dashboard and overlay refresh at an efficient 900 ms cadence. |
-| **Automatic idle stop** | Telemetry stops after leaving Monitor when no overlay is open. |
-| **Responsive queue** | Worker results are applied on the Tk thread within a bounded time budget. |
+| **Top-five sampling** | A lightweight current-user pass every 3 seconds selects five CPU and five RAM leaders; only at most ten records are retained. |
+| **Independent render/sample clocks** | The overlay targets 60 Hz animation; it reads a small cached summary at 2 Hz while sensors sample about 1 Hz. The main tab retains 900 ms polling. |
+| **Visible work only** | Hidden/compact overlays stop animating; telemetry stops after neither Monitor view is visible. |
+| **Responsive queue and artwork** | A 4 ms UI result budget, lazy bounded background artwork preparation, and per-card updates avoid synchronous image stalls. |
 | **Short intro** | The safe Tk splash is limited to 350 ms. |
 
-The monitor owns no independent application window or event loop. It is a launcher-managed service with explicit startup, failure, idle, and shutdown states.
+The telemetry service owns no UI or separate event loop. Its new floating panel is a launcher-owned Tk window with explicit visibility, animation and timer lifetimes. See [performance measurements and limits](docs/performance.md).
 
 ---
+
+## Start with Windows
+
+On Windows, XVVIIX registers **current-user login startup** after its first successful launch/unlock. Open **Settings → Start with Windows** to turn it off or back on. The opt-out is remembered; the launcher does not silently recreate a disabled entry. No administrator access is required, and the vault password is still required at startup.
+
+Keep the project in a permanent folder. Windows Startup Apps controls can independently disable the registration. See [startup settings, registry paths and troubleshooting](docs/windows-startup.md).
+
+## Launch, scan and exit updates
+
+Process creation, trainer startup and administrator dispatch run off the Tk event thread. When closing with running programs, XVVIIX warns that timing will stop, saves a checkpoint and leaves those programs open. Slow final saves have a responsive retry/explicit-exit dialog.
+
+Scanning now offers only **Control Panel — registered apps** and **Find programs — usual install locations**. Whole-system/drive scanning is removed. Runtime components such as .NET and embedded 7-Zip helpers are filtered, and duplicate product versions prefer the main executable. See [current library workflow](docs/library-workflow.md).
 
 ## Interface
 
 ### Library command center
 
-The primary view adapts from compact laptop widths to larger desktop layouts. Cards expose launch, trainer, location, icon, pin, and end-task actions without hiding core controls in menus.
+The primary view adapts from compact laptop widths to larger desktop layouts. Cards expose launch, trainer, location, icon, pin, and end-task actions. Live time/status changes update existing card widgets; structural changes rebuild only the affected card while preserving the scroll anchor. Previous/Next controls are available above and below the cards.
+
+Use checkboxes, Ctrl-click or Shift-click to select entries, then move, pin/unpin or remove them together. Removal affects launcher entries, not program files. **Recent Activity / Open History** opens a searchable, filterable timeline without resetting the card view.
 
 ### Hardware Monitor
 
@@ -126,9 +143,11 @@ Open **MONITOR** from the main navigation. XVVIIX activates telemetry asynchrono
 - Memory, swap, system-volume usage, and disk throughput
 - Upload/download rates, active interfaces, local IPv4 addresses, and TCP latency
 - Host identity, uptime, process/thread counts, battery, and sensor data
-- Current-user processes with normalized CPU and bounded memory percentages
+- Five current-user CPU leaders and five RAM leaders, with normalized percentages
 
-Press <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>M</kbd> to open or compact the overlay. Press <kbd>F11</kbd> to toggle fullscreen.
+With the launcher focused, press <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>M</kbd> to open or compact the overlay. Drag its title to move it; use the square button to collapse/expand, and **×** or **Escape** to close. Press <kbd>F11</kbd> to toggle launcher fullscreen.
+
+The overlay follows the compact reference layout with **80% default opacity**. Right-click it to adjust opacity; collapsed mode retains internet rates. The main Monitor now uses two top-five panels instead of a full process table. The **60 Hz target describes UI drawing, not game FPS or sensor scans**. Borderless/windowed games are the intended use; exclusive-fullscreen overlays are not injected. [Current changes and preview](docs/monitor-update.md).
 
 > GPU details depend on the installed driver and backend. Unsupported hardware displays `N/A` instead of blocking startup.
 
@@ -144,10 +163,11 @@ XVVIIX is local-first by default.
 - No analytics, advertising SDK, account requirement, or cloud synchronization
 - Scanner and diagnostics execute locally
 - Passwords are not stored by the launcher
+- Optional **Forgot Password** flow: code-free local reset that preserves your libraries
 
-The Monitor performs one optional TCP latency check against `1.1.1.1:443`; it sends no library or diagnostic content. Remove or change the probe target in `game_launcher.py` if your environment prohibits outbound checks.
+The Monitor performs one optional TCP latency check against `1.1.1.1:443`; it sends no library or diagnostic content. Remove or change the probe target in `xvviix/services/hardware_monitor.py` if your environment prohibits outbound checks.
 
-> Keep your vault password safe. It cannot be recovered by the project maintainers.
+> **Local reset is a convenience lock, not password-only protection.** Anyone using the same OS account with access to the local recovery material can set a new password. Windows protects that material with current-user DPAPI; non-Windows development uses a private `0600` key file. Without an enabled, usable recovery file, a forgotten password cannot be bypassed. See [Password reset](docs/password-reset.md) for setup, legacy-vault limitations and the security model.
 
 ---
 
@@ -186,13 +206,19 @@ Double-click:
 START_XVVIIX.bat
 ```
 
+The BAT file first uses `.venv\Scripts\python.exe` from this project. If it is absent, it falls back to `py -3`, then `python` from PATH. It does not install packages automatically.
+
+**Keep the entire `xvviix/` package beside `game_launcher.py`.** Updating only the entry-point file is not enough. Existing data stays in its previous location; this refactor does not move the vault into the package folder.
+
 Or run directly:
 
 ```powershell
 python game_launcher.py
 ```
 
-On first launch, XVVIIX asks you to create a master password and initializes its encrypted local data files.
+On first launch, XVVIIX asks you to create a master password and initializes its encrypted local data files. **Enable local password reset on this computer** is checked by default, with a warning explaining who can reset the password; uncheck it for password-only protection.
+
+For an existing vault, the same option starts unchecked and requires one successful sign-in with the current password. Once enabled, choose **FORGOT PASSWORD?**, enter a new password twice, then **SAVE PASSWORD & UNLOCK**. No recovery code, email or old password is needed, and the existing libraries are kept. A legacy vault whose password was already forgotten cannot be recovered retroactively.
 
 ---
 
@@ -208,18 +234,36 @@ The background track is credited to **AlkaKrab** and comes from *Free Sci-Fi Mus
 
 ```text
 XVVIIX-Launcher/
-├── game_launcher.py          # Complete application and integrated Monitor service
-├── START_XVVIIX.bat          # Diagnostic Windows launcher
-├── requirements.txt          # Python dependencies
-├── List-Features.txt         # Completed roadmap state
-├── MUSIC_CREDITS.txt         # Optional music attribution and license summary
-├── icon.ico                  # Application icon
-├── assets/
-│   ├── xvviix_header.png                    # Header artwork
-│   ├── xvviix_music_galactic_odyssey.ogg   # Cinematic background music
-│   └── tunetank.com_*.wav                   # Interface sound effects
-└── docs/images/
-    └── xvviix-banner.svg                    # GitHub README artwork
+├── game_launcher.py          # Small desktop entry point
+├── START_XVVIIX.bat          # Windows venv/interpreter selection
+├── requirements.txt         # Pinned runtime dependencies
+├── requirements-dev.txt     # Runtime + static-analysis tooling
+├── .github/workflows/       # Linux/Windows regression checks
+├── xvviix/
+│   ├── app.py               # Desktop composition and legacy library UI
+│   ├── paths.py             # Source/frozen paths; existing data location preserved
+│   ├── constants.py         # Shared defaults
+│   ├── utils.py             # Formatting/path/color helpers
+│   ├── models.py            # Record normalization
+│   ├── security/crypto.py   # Password derivation, encryption, key wrapping, DPAPI
+│   ├── storage/vault.py     # Independent VaultStore state and file integrity
+│   ├── services/            # Launching, software catalog, verified termination, icons and telemetry
+│   └── ui/                  # Keyed library view, activity history, scan scope, vault and overlay
+├── assets/                  # Header artwork, background track and UI cues
+├── icon.ico
+├── MUSIC_CREDITS.txt
+├── tests/                   # Disposable fixtures, backend/UI/Windows regression tests
+├── tools/                   # Reproducible synthetic performance benchmark
+└── docs/
+    ├── architecture.md      # Module boundaries, compatibility and upgrade instructions
+    ├── performance.md       # Earlier performance-phase notes
+    ├── monitor-update.md    # Opacity, compact network, top five and retired crash reporting
+    ├── launch-scan.md       # Earlier responsive launch/exit and icon phase
+    ├── library-workflow.md  # Current scanner, per-card updates, bulk actions and activity
+    ├── windows-startup.md   # Login startup and the persistent opt-out
+    ├── password-reset.md    # Code-free reset and its security model
+    ├── stability.md         # Backup/recovery rules and stability-phase notes
+    └── images/
 ```
 
 Runtime libraries, encrypted vault metadata, settings, logs, icon caches, and backups are excluded from version control.
@@ -238,16 +282,17 @@ Common generated files include:
 
 | File | Purpose |
 |---|---|
-| `xvviix_vault.json` | Vault metadata and password verifier |
+| `xvviix_vault.json` | Vault metadata, password verifier and wrapped data key for recoverable vaults |
+| `xvviix_local_recovery.json` | Optional secret local recovery material; never publish or share |
 | `games.json` | Encrypted game library |
 | `apps.json` | Encrypted workspace library |
 | `founded.json` | Encrypted discovery review queue |
-| `reports.json` | Encrypted diagnostic and crash reports |
+| `reports.json` | Encrypted system diagnostics; old retired records are retained but hidden |
 | `activity.json` | Encrypted recent activity |
-| `launcher_settings.json` | Small validated UI/audio preferences |
+| `launcher_settings.json` | Small validated UI/audio/scan preferences |
 | `xvviix_launcher.log` | Structured startup and runtime diagnostics |
 
-Do not commit these generated files.
+Do not commit these generated files or any `.corrupt-*` recovery archives. A damaged backup no longer blocks a healthy primary; damaged primary data is never silently replaced with an empty library. Read the [recovery rules](docs/stability.md#recovery-rules) before restoring files.
 
 ---
 
@@ -290,7 +335,7 @@ Install `pygame` and verify that the bundled `.ogg` and `.wav` files are present
 <details>
 <summary><strong>The vault cannot be unlocked</strong></summary>
 
-Verify that the matching `xvviix_vault.json` or backup is present. Do not replace vault metadata independently of the encrypted data files. The master password cannot be reset without decrypting the original data.
+Verify that the matching `xvviix_vault.json` or backup is present. Do not replace vault metadata independently of the encrypted data files. If local reset was enabled on this computer, use **FORGOT PASSWORD?**. If the recovery file is missing, damaged or tied to another account, sign in with the existing password to enable reset again. Without the password or usable local recovery material, the launcher cannot decrypt the existing data and will not replace it with an empty vault. See [Password reset](docs/password-reset.md).
 
 </details>
 
@@ -299,11 +344,16 @@ Verify that the matching `xvviix_vault.json` or backup is present. Do not replac
 ## Development checks
 
 ```powershell
-python -m py_compile game_launcher.py
-python -m pyflakes game_launcher.py
+python -m pip install -r requirements-dev.txt
+python -m pip check
+python -m compileall -q game_launcher.py xvviix tests tools
+python -m pyflakes game_launcher.py xvviix tests tools
+python -m unittest discover -s tests -v
 ```
 
-The project has also been exercised with virtual-display UI tests covering compact layouts, repeated tab switching, on-demand Monitor startup, process filtering/sorting, overlay lifecycle, percentage constraints, degraded startup, and clean service shutdown.
+The regression tests use disposable data and cover vault corruption, non-destructive backups, legacy opt-in, password reset, write-failure rollback, package boundaries, old-format ciphertext, service lifecycle and Tk dialogs. DPAPI, native multimedia-timer and real BAT tests run only on Windows; Linux CI supplies a virtual display. The workflow is configured for Linux/Windows with Python 3.11/3.13; it must be pushed to GitHub to run there. See [stability and test instructions](docs/stability.md#automated-checks).
+
+The project has also been exercised with virtual-display UI tests covering compact layouts, repeated tab switching, on-demand Monitor startup, top-five selection, opacity, compact-network display, scan policies, per-card updates, scroll anchoring, multi-selection, verified process exit, activity history and clean service shutdown.
 
 ---
 

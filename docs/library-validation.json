@@ -1,0 +1,23 @@
+{
+  "date": "2026-09-07",
+  "python_3_11_linux": {
+    "tests": 223,
+    "passed": 215,
+    "windows_only_skipped": 8
+  },
+  "python_3_13_linux": {
+    "tests": 223,
+    "passed": 215,
+    "windows_only_skipped": 8
+  },
+  "card_updates": "stable widget identities for nonstructural changes; only changed structural card rebuilt",
+  "scroll_anchor": "verified across card-height changes",
+  "scanner_modes": [
+    "registered",
+    "search"
+  ],
+  "search_scope": "usual/known installation locations only",
+  "bulk_removal": "library entries only, not program files",
+  "end_task": "outcome checked before warning; real child test passed",
+  "native_windows": "not executed in this workspace"
+}

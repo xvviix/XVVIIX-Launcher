@@ -1,0 +1,87 @@
+{
+  "environment": {
+    "python": "3.13.14",
+    "platform": "Linux",
+    "tk": 8.6
+  },
+  "overlay": {
+    "target_fps": 60,
+    "callback_fps": 59.994798368852315,
+    "frames": 600,
+    "draw_ms_p95": 0.548738000134108,
+    "frame_interval_ms_p95": 17.525816999977906,
+    "missed_deadlines": 0,
+    "fine_timer_active": false,
+    "sensor_polls": 20,
+    "snapshot_changes": 11,
+    "canvas_items": 108,
+    "elapsed_seconds": 10.000943286999927,
+    "python_cpu_percent_of_one_core": 4.258007527685354,
+    "synthetic_sensor_samples": 10,
+    "window_width": 282,
+    "window_height": 566,
+    "data_source": "synthetic demo, not the user's machine"
+  },
+  "snapshot_copy": {
+    "full_ms_median": 0.1692230000571726,
+    "full_ms_p95": 0.23963000012372504,
+    "overlay_ms_median": 0.10194899994075968,
+    "overlay_ms_p95": 0.12800299987247854,
+    "input_candidates": 512,
+    "process_rows": 10,
+    "top_rows_per_category": 5,
+    "iterations": 300,
+    "median_copy_speed_ratio": 1.6598789606127022
+  },
+  "notes": [
+    "Callback frequency is not a vsync/presented-frame measurement and is not game FPS.",
+    "Process CPU excludes other processes, including the Linux display server.",
+    "Synthetic inputs keep the workload repeatable; native drivers and game load can change results."
+  ],
+  "process_sampling_comparison": {
+    "before": {
+      "median_ms": 12.155075500004386,
+      "p95_ms": 20.49416799991377,
+      "max_retained_records": 5,
+      "eligible_processes_range": [
+        4,
+        5
+      ],
+      "iterations": 30
+    },
+    "after": {
+      "median_ms": 3.0952915000170833,
+      "p95_ms": 3.406426000083229,
+      "max_retained_records": 5,
+      "eligible_processes_range": [
+        5,
+        5
+      ],
+      "iterations": 30
+    }
+  },
+  "change_scope": {
+    "opacity_default": 0.8,
+    "top_processes_per_category": 5,
+    "maximum_retained_process_records": 10,
+    "process_sample_interval_seconds": 3,
+    "ram_cleaner_added": false,
+    "crash_report_feature": "removed; legacy saved records retained but not displayed"
+  },
+  "validation": {
+    "linux_python_3_11": {
+      "tests": 147,
+      "passed": 141,
+      "windows_only_skipped": 6
+    },
+    "linux_python_3_13": {
+      "tests": 147,
+      "passed": 141,
+      "windows_only_skipped": 6
+    },
+    "native_windows": "not run",
+    "unexpected_callback_errors": 0,
+    "ram_cleaner": "cancelled by user; not implemented",
+    "crash_report_feature": "removed; old encrypted records retained but hidden"
+  }
+}

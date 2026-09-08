@@ -1,0 +1,4 @@
+-r requirements.txt
+
+# Static analysis; regression tests use Python's built-in unittest.
+pyflakes==3.4.0

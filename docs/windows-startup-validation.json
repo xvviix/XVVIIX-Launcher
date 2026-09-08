@@ -1,0 +1,16 @@
+{
+  "date": "2026-09-07",
+  "python_3_11_linux": {
+    "tests": 246,
+    "passed": 237,
+    "windows_only_skipped": 9
+  },
+  "python_3_13_linux": {
+    "tests": 246,
+    "passed": 237,
+    "windows_only_skipped": 9
+  },
+  "registry_scope": "current user only; own Run value and own preference marker",
+  "opt_out": "persisted; never silently re-enabled after a completed disable",
+  "actual_windows_registry_or_login_test": "not executed in this workspace"
+}

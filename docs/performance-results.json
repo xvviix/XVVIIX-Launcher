@@ -1,0 +1,70 @@
+{
+  "environment": {
+    "python": "3.13.14",
+    "platform": "Linux",
+    "tk": 8.6
+  },
+  "overlay": {
+    "target_fps": 60,
+    "callback_fps": 59.996895189720966,
+    "frames": 721,
+    "draw_ms_p95": 0.24128599943651352,
+    "frame_interval_ms_p95": 17.42878900040523,
+    "missed_deadlines": 0,
+    "fine_timer_active": false,
+    "sensor_polls": 24,
+    "snapshot_changes": 13,
+    "canvas_items": 88,
+    "elapsed_seconds": 12.000425652000558,
+    "python_cpu_percent_of_one_core": 2.688641906182821,
+    "synthetic_sensor_samples": 12,
+    "window_width": 282,
+    "window_height": 566,
+    "data_source": "synthetic demo, not the user's machine"
+  },
+  "snapshot_copy": {
+    "full_ms_median": 1.7155020004793187,
+    "full_ms_p95": 1.8190920000051847,
+    "overlay_ms_median": 0.052709000556205865,
+    "overlay_ms_p95": 0.07504200038965791,
+    "process_rows": 512,
+    "iterations": 300,
+    "median_copy_speed_ratio": 32.546661526052
+  },
+  "notes": [
+    "Callback frequency is not a vsync/presented-frame measurement and is not game FPS.",
+    "Process CPU excludes other processes, including the Linux display server.",
+    "Synthetic inputs keep the workload repeatable; native drivers and game load can change results."
+  ],
+  "artwork_ui_comparison": {
+    "before": {
+      "cold_calls": 24,
+      "ui_call_ms_median": 26.831187000425416,
+      "ui_call_ms_p95": 28.61335299894563,
+      "total_ui_call_ms": 653.5173259999283,
+      "all_images_ready_ms": 653.5173259999283
+    },
+    "after": {
+      "cold_calls": 24,
+      "ui_call_ms_median": 0.02096899970638333,
+      "ui_call_ms_p95": 0.3865430007863324,
+      "total_ui_call_ms": 1.4711739986523753,
+      "all_images_ready_ms": 651.3350749992242
+    }
+  },
+  "validation": {
+    "linux_python_3_11": {
+      "tests": 131,
+      "passed": 125,
+      "windows_only_skipped": 6
+    },
+    "linux_python_3_13": {
+      "tests": 131,
+      "passed": 125,
+      "windows_only_skipped": 6
+    },
+    "native_windows": "not executed in this workspace",
+    "unexpected_tk_callback_errors": 0,
+    "data_safety_modules": "crypto.py, storage/vault.py and models.py unchanged"
+  }
+}
