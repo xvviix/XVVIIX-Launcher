@@ -179,9 +179,8 @@ Open **MONITOR** from the main navigation. XVVIIX activates telemetry asynchrono
 </table>
 
 <div align="center">
-<video src="docs/images/monitor-overlay-demo.mp4" controls width="420"></video>
-<br>
-<sub>Overlay demo — open, compact and close transitions</sub>
+<a href="docs/images/monitor-overlay-demo.mp4">▶ Watch the overlay demo (MP4)</a><br>
+<sub>open, compact and close transitions</sub>
 </div>
 
 With the launcher focused, press <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>M</kbd> to open or compact the overlay. Drag its title to move it; use the square button to collapse/expand, and **×** or **Escape** to close. Press <kbd>F11</kbd> to toggle launcher fullscreen.
